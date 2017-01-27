@@ -6,30 +6,36 @@
 <div id="index">
     <div id="map">[[map]]</div>
     <div id="places">
-        <div class="hidcon">X</div>
-        <label>
-            Hotels
-            <select></select><button>X</button>
-        </label>
-        <label>
-            Restaurants
-            <select></select><button>X</button>
-        </label>
-        <label>
-            Things To Do
-            <select></select><button>X</button>
-        </label>
+        <label for="placesIcon" class="glyphicon glyphicon-map-marker"></label>
+        <input type="checkbox" class="hicon" id="placesIcon">
+        <div class="hiconTarget">
+            <label>
+                Hotels
+                <select></select><button>X</button>
+            </label>
+            <label>
+                Restaurants
+                <select></select><button>X</button>
+            </label>
+            <label>
+                Things To Do
+                <select></select><button>X</button>
+            </label>
+        </div>
     </div>
     <div id="days">
-        <div class="hidcon">X</div>
-        Day 2
+        <label for="daysIcon" class="glyphicon glyphicon-calendar"></label>
+        <input type="checkbox" class="hicon" id="daysIcon">
+        <div class="hiconTarget">
+            Day 2
 
-        <ol>
-            <li><a href="/contact">1</a></li>
-            <li><a href="/contact">2</a></li>
-            <li><a href="/contact">3</a></li>
-            <li><a href="/contact">+</a></li>
-        </ol>
+            <ol>
+                <li><a href="/contact">1</a></li>
+                <li><a href="/contact">2</a></li>
+                <li><a href="/contact">3</a></li>
+                <li><a href="/contact">+</a></li>
+            </ol>
+        </div>
     </div>
 </div>
 {% endblock %}
