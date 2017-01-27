@@ -3,7 +3,33 @@
 {% block title %}Your Trip{% endblock %}
 
 {% block body %}
-{{ hotels }}
-{{ restaurants }}
-{{ activities }}
+<div id="index">
+    <div id="map">[[map]]</div>
+    <div id="places">
+        <div class="hidcon">X</div>
+        <label>
+            Hotels
+            <select></select><button>X</button>
+        </label>
+        <label>
+            Restaurants
+            <select></select><button>X</button>
+        </label>
+        <label>
+            Things To Do
+            <select></select><button>X</button>
+        </label>
+    </div>
+    <div id="days">
+        <div class="hidcon">X</div>
+        Day 2
+
+        <ol>
+            <li><a href="/contact">1</a></li>
+            <li><a href="/contact">2</a></li>
+            <li><a href="/contact">3</a></li>
+            <li><a href="/contact">+</a></li>
+        </ol>
+    </div>
+</div>
 {% endblock %}
