@@ -6,7 +6,8 @@
     "nodemon": "^1.11.0"
   },
   "scripts": {
-    "start": "nodemon -e js,html ."
+    "start": "nodemon -e js,html .",
+    "seed": "node seed.js"
   },
   "dependencies": {
     "body-parser": "^1.16.0",
