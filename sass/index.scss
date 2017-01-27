@@ -13,7 +13,7 @@
   }
   #places {
     position: absolute;
-    bottom: 0px;
+    bottom: 8px;
     left: 0px;
   }
   #days {
@@ -23,10 +23,25 @@
   }
 }
 
+.floating-icon {
+  color: white;
+  font-size: 2em;
+  width: 100%;
+}
+
 .hicon {
   display: none;
 
   &:checked{
+    ~ #placesIconLbl {
+      margin-bottom: 20px;
+    }
+
+    ~ #daysIconLbl {
+      margin-bottom: 127px;
+      padding-right: 9px;
+    }
+
     ~ .hiconTarget {
       display: none;
     }
