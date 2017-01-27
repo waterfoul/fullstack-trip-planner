@@ -28,6 +28,9 @@ app.set('view engine', 'html');
 // exppress.static(local_path)
 app.use('/static', express.static(path.join(__dirname, 'static')));
 
+app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules', 'bootstrap', 'dist')));
+app.use('/jquery', express.static(path.join(__dirname, 'node_modules', 'jquery', 'dist')));
+
 //Routes
 app.use(require('./routes'));
 
