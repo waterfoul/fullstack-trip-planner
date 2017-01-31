@@ -1,21 +1,13 @@
-var db = require('./db');
 var Sequelize = require('sequelize');
-var place = require('./place');
+var db = require('./_db');
 
 var Restaurant = db.define('restaurant', {
-	name: {
-		type: Sequelize.STRING,
-		allowNull: false
-	},
-	cuisine: {
-		type: Sequelize.STRING
-	},
-	price: {
-		type: Sequelize.DECIMAL,
-		allowNull: false
-	}
+  name: Sequelize.STRING,
+  price: {
+    type: Sequelize.INTEGER,
+    validate: { min: 1, max: 5 }
+  },
+  cuisine: Sequelize.STRING
 });
-
-Restaurant.belongsTo(place);
 
 module.exports = Restaurant;

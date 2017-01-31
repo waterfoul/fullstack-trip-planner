@@ -1,18 +1,9 @@
-var db = require('./db');
 var Sequelize = require('sequelize');
-var place = require('./place');
+var db = require('./_db');
 
 var Activity = db.define('activity', {
-	name: {
-		type: Sequelize.STRING,
-		allowNull: false
-	},
-	ageRange: {
-		type: Sequelize.STRING,
-		defaulValue: "All"
-	}
+  name: Sequelize.STRING,
+  age_range: Sequelize.STRING
 });
 
-Activity.belongsTo(place);
-
-module.exports = Activity;
+module.exports = Activity

@@ -1,11 +1,12 @@
-const db = require('./db');
+var db = require('./_db');
 
-module.exports = {
-	place: require('./place'),
-	hotel: require('./hotel'),
-	restaurant: require('./restaurant'),
-	activity: require('./activity'),
-	sync: function (force) {
-		return db.sync({force: force});
-	}
-};
+var Place = require('./place');
+var Hotel = require('./hotel');
+var Restaurant = require('./restaurant');
+var Activity = require('./activity');
+
+Hotel.belongsTo(Place);
+Restaurant.belongsTo(Place);
+Activity.belongsTo(Place);
+
+module.exports = db;
