@@ -16,21 +16,42 @@
 
                 </label>
                 <div class = "input-group">
-                    <select class = "form-control"></select>
+                    <select class = "form-control">
+                        {% for hotel in hotels %}
+                            <option>{{hotel.name}}</option>
+                        {% endfor %}
+                    </select>
                     <span class = "input-group-btn"><button class = "btn btn-default">+</button></span>
                 </div>
             </div>
+            <div class = "form-group">
+                <label>
+                    Restaurants
 
-            <label>
-                Restaurants
-                <button>X</button>
-            </label>
-            <select></select>
-            <label>
-                Things To Do
-                <button>X</button>
-            </label>
-            <select></select>
+                </label>
+                <div class = "input-group">
+                    <select class = "form-control">
+                        {% for restaurant in restaurants %}
+                            <option>{{restaurant.name}}</option>
+                        {% endfor %}
+                    </select>
+                    <span class = "input-group-btn"><button class = "btn btn-default">+</button></span>
+                </div>
+            </div>
+            <div class = "form-group">
+                <label>
+                    Things To Do
+
+                </label>
+                <div class = "input-group">
+                    <select class = "form-control">
+                        {% for activity in activities %}
+                            <option>{{activity.name}}</option>
+                        {% endfor %}
+                    </select>
+                    <span class = "input-group-btn"><button class = "btn btn-default">+</button></span>
+                </div>
+            </div>
         </div>
     </div>
     <div id="days">
@@ -38,13 +59,22 @@
         <label for="daysIcon" id="daysIconLbl" class="glyphicon glyphicon-calendar floating-icon text-right"></label>
         <div class="hiconTarget panel panel-default">
             <div class="panel-heading">Itinerary</div>
-            Day 2
-
+            <div class="btn-group" role="group">
+                <button class="btn btn-info">1</button>
+                <button class="btn btn-primary">Day 2</button>
+                <button class="btn btn-primary">X</button>
+                <button class="btn btn-info">3</button>
+                <button class="btn btn-info">+</button>
+            </div>
+            <h1>My Hotel</h1>
             <ol>
-                <li><a href="/contact">1</a></li>
-                <li><a href="/contact">2</a></li>
-                <li><a href="/contact">3</a></li>
-                <li><a href="/contact">+</a></li>
+                <li>Andaz Wall Street<button class="btn btn-default">X</button></li>
+            </ol>
+            <h1>My Restaurants</h1>
+            <h1>My Activities</h1>
+            <ol>
+                <li>Ground Zero<button class="btn btn-default">X</button></li>
+                <li>South Street Seaport<button class="btn btn-default">X</button></li>
             </ol>
         </div>
     </div>
