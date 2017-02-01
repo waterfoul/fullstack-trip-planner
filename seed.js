@@ -1,5 +1,5 @@
 // This file should contain all the record creation needed to seed the database with its default values.
-// The data can then be loaded with the node seed.js 
+// The data can then be loaded with the node seed.js
 
 var Promise = require('bluebird');
 var db = require('./models');
@@ -49,7 +49,7 @@ var data = {
     {name: "Ground Zero", place: {address: "1 Liberty Plz Lbby 2", city: "New York", state: "NY", phone: "123-456-7890", location: [40.709329, -74.013120]}, age_range: "All" },
     {name: "National September 11th Memorial & Museum", place: {address: "1 Albany St", city: "New York", state: "NY", phone: "123-456-7890", location: [40.709189, -74.013157]}, age_range: "All" },
     {name: "Battery Park", place: {address: "State St & Battery Pl", city: "New York", state: "NY", phone: "123-456-7890", location: [40.704531, -74.014334]}, age_range: "All" },
-    {name: "Staten Island Ferry Whitehall Terminal", place: {address: "4 S St", city: "New York", state: "NY", phone: "123-456-7890", location: [40.729125, -73.989650]}, age_range: "All" },
+    {name: "Staten Island Ferry Whitehall Terminal", place: {address: "4 S St", city: "New York", state: "NY", phone: "123-456-7890", location: [40.7010306, -74.0130686]}, age_range: "All" },
     {name: "Chinatown Ice Cream Factory", place: {address: "65 Bayard St", city: "New York", state: "NY", phone: "123-456-7890", location: [40.715323, -73.998190]}, age_range: "All" },
     {name: "Blue Man Group", place: {address: "434 Lafayette St", city: "New York", state: "NY", phone: "123-456-7890", location: [40.729373, -73.992104]}, age_range: "All" },
     {name: "Scott's Pizza Tours", place: {address: "244 5th Ave", city: "New York", state: "NY", phone: "123-456-7890", location: [40.744610, -73.987708]}, age_range: "All" },
@@ -75,8 +75,13 @@ db.sync({force: true})
   });
 })
 .then(function () {
-  console.log("Finished inserting data (press ctrl-c to exit)");
+  console.log("Finished inserting data");
 })
 .catch(function (err) {
   console.error('There was totally a problem', err, err.stack);
+})
+.finally(function () {
+  db.close() // uses promises but does not return a promise. https://github.com/sequelize/sequelize/pull/5776
+  console.log('connection closed'); // the connection eventually closes, we just manually do so to end the process quickly
+  return null; // silences bluebird warning about using non-returned promises inside of handlers.
 });
