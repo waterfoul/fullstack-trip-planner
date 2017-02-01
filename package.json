@@ -24,6 +24,9 @@
     "volleyball": "1.1.2"
   },
   "devDependencies": {
+    "eslint": "^3.14.1",
+    "eslint-config-fullstack": "^2.6.0",
+    "eslint-plugin-react": "^6.9.0",
     "node-sass": "^3.8.0",
     "nodemon": "^1.4.1"
   }
