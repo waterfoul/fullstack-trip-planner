@@ -33,9 +33,13 @@ var dayModule = (function () {
     this.activities = [];
     // for days based on existing data
     utilsModule.merge(data, this);
-    if (this.hotel) this.hotel = attractionsModule.getEnhanced(this.hotel);
-    this.restaurants = this.restaurants.map(attractionsModule.getEnhanced);
-    this.activities = this.activities.map(attractionsModule.getEnhanced);
+
+    attractionsModule.dataFetched.then(() => {
+      if (this.hotel) this.hotel = attractionsModule.getEnhanced(this.hotel);
+      this.restaurants = this.restaurants.map(attractionsModule.getEnhanced);
+      this.activities = this.activities.map(attractionsModule.getEnhanced);
+    });
+
     // remainder of constructor
     this.buildButton().showButton();
   }

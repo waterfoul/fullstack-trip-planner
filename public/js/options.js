@@ -18,9 +18,21 @@ $(function(){
   var $activitySelect = $optionsPanel.find('#activity-choices');
 
   // make all the option tags (second arg of `forEach` is a `this` binding)
-  hotels.forEach(makeOption, $hotelSelect);
-  restaurants.forEach(makeOption, $restaurantSelect);
-  activities.forEach(makeOption, $activitySelect);
+  attractionsModule.dataFetched.then(([hotels, restaurants, activities]) => {
+	  hotels.forEach(makeOption, $hotelSelect);
+	  restaurants.forEach(makeOption, $restaurantSelect);
+	  activities.forEach(makeOption, $activitySelect);
+
+	  // what to do when the `+` button next to a `select` is clicked
+	  $optionsPanel.on('click', 'button[data-action="add"]', function () {
+		  var $select = $(this).siblings('select');
+		  var type = $select.data('type'); // from HTML data-type attribute
+		  var id = $select.find(':selected').val();
+		  // get associated attraction and add it to the current day in the trip
+		  var attraction = attractionsModule.getByTypeAndId(type, id);
+		  tripModule.addToCurrent(attraction);
+	  });
+  });
 
   function makeOption (databaseAttraction) {
     var $option = $('<option></option>') // makes a new option tag
@@ -28,15 +40,5 @@ $(function(){
       .val(databaseAttraction.id);
     this.append($option); // add the option to the specific select
   }
-
-  // what to do when the `+` button next to a `select` is clicked
-  $optionsPanel.on('click', 'button[data-action="add"]', function () {
-    var $select = $(this).siblings('select');
-    var type = $select.data('type'); // from HTML data-type attribute
-    var id = $select.find(':selected').val();
-    // get associated attraction and add it to the current day in the trip
-    var attraction = attractionsModule.getByTypeAndId(type, id);
-    tripModule.addToCurrent(attraction);
-  });
 
 });
