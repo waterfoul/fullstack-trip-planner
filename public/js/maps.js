@@ -56,10 +56,10 @@ var mapModule = (function () {
         restaurant: '/images/restaurant.png',
         activity: '/images/star-3.png'
       };
-      var coords = attraction.place.location;
+      //var coords = attraction.place.location;
       var options = {
         icon: iconPath[attraction.type],
-        position: new google.maps.LatLng(coords[0], coords[1]),
+        position: new google.maps.LatLng(attraction.latitude, attraction.longitude),
         animation: google.maps.Animation.DROP
       };
       return new google.maps.Marker(options);

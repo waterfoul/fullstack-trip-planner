@@ -70,6 +70,13 @@ var attractionModule = (function () {
     mapModule.hide(this.marker); // map
   };
 
+Object.defineProperty(Attraction.prototype, 'latitude', {get: function(){
+  return this.place.location[0];
+}})
+
+Object.defineProperty(Attraction.prototype, 'longitude', {get: function(){
+  return this.place.location[1];
+}})
   // globally accessible module methods
 
   var publicAPI = {

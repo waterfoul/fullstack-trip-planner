@@ -6,11 +6,14 @@ var Activity = require('../../models/activity');
 
 // /api/days
 router.get('/', function(req, res, next) {
-  Day.findAll({include: [
-    Hotel,
-    Restaurant,
-    Activity
-  ]})
+  Day.findAll({
+    include: [
+      Hotel,
+      Restaurant,
+      Activity
+    ],
+    order: 'number'
+  })
     .then(res.json.bind(res))
     .catch(next);
 });

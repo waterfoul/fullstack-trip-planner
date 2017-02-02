@@ -41,7 +41,11 @@ var tripModule = (function () {
   // jQuery event binding
 
   $(function () {
-    $addButton.on('click', () => addDay());
+    $addButton.on('click', () => {
+      $addButton.prop('disabled', true);
+      addDay()
+      .then(() => $addButton.prop('disabled', false))
+    });
     $removeButton.on('click', deleteCurrentDay);
   });
 
