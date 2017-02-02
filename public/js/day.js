@@ -100,19 +100,34 @@ var dayModule = (function () {
     // adding to the day object
     switch (attraction.type) {
       case 'hotel':
-        if (this.hotel) this.hotel.hide();
-        this.hotel = attraction;
+        $.post('/api/days/' + this.id + '/hotel/' + attraction.id)
+        .then(() => {
+          if (this.hotel) this.hotel.hide();
+          this.hotel = attraction;
+          attraction.show();
+        })
+        .catch(() => alert('Couldn\'t add hotel'));
         break;
       case 'restaurant':
-        utilsModule.pushUnique(this.restaurants, attraction);
+        $.post('/api/days/' + this.id + '/restaurant/' + attraction.id)
+        .then(() => {
+          utilsModule.pushUnique(this.restaurants, attraction);
+          attraction.show();
+        })
+        .catch(() => alert('Couldn\'t add restaurant'));
         break;
       case 'activity':
-        utilsModule.pushUnique(this.activities, attraction);
+        $.post('/api/days/' + this.id + '/activity/' + attraction.id)
+        .then(() => {
+          utilsModule.pushUnique(this.activities, attraction);
+          attraction.show();
+        })
+        .catch(() => alert('Couldn\'t add activity'));
         break;
       default: console.error('bad type:', attraction);
     }
     // activating UI
-    attraction.show();
+    //attraction.show();
   };
 
   Day.prototype.removeAttraction = function (attraction) {
