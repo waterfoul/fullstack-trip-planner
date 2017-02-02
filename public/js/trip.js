@@ -20,7 +20,7 @@ var tripModule = (function () {
   // application state
 
   var days = [],
-      currentDay;
+    currentDay;
 
   // jQuery selections
 
@@ -47,27 +47,50 @@ var tripModule = (function () {
 
   function addDay (data, noSwitch) {
     if (this && this.blur) this.blur(); // removes focus box from buttons
+    var promise = Promise.resolve();
     if(!data){
       data = { number: days.length + 1 };
-      $.post('/api/days', data);
+      promise = $.post('/api/days', data);
     }
-    var newDay = dayModule.create(data); // dayModule
-    days.push(newDay);
-    if (days.length === 1) {
-      currentDay = newDay;
-    }
-    if(!noSwitch){
-      switchTo(newDay);
-    }
+    promise.then(() => {
+      var newDay = dayModule.create(data); // dayModule
+      days.push(newDay);
+      if (days.length === 1) {
+        currentDay = newDay;
+      }
+      if(!noSwitch){
+        switchTo(newDay);
+      }
+    }).catch(() => alert('Failed to add day'));
   }
+
+  // function addDayFunction (data, noSwitch) {
+  //   if (this && this.blur) this.blur(); // removes focus box from buttons
+  //   if (!data) {
+  //     data = {number: days.length + 1};
+  //     $.post('/api/days', data).then(() => addDayStep2(data, noSwitch)).catch(() => alert('Failed to add day'));
+  //   } else {
+  //     addDayStep2(data, noSwitch);
+  //   }
+  // }
+  // function addDayStep2(data, noSwitch) {
+  //   var newDay = dayModule.create(data); // dayModule
+  //   days.push(newDay);
+  //   if (days.length === 1) {
+  //     currentDay = newDay;
+  //   }
+  //   if(!noSwitch){
+  //     switchTo(newDay);
+  //   }
+  // }
 
   function deleteCurrentDay () {
     // prevent deleting last day
     if (days.length < 2 || !currentDay) return;
     // remove from the collection
     var index = days.indexOf(currentDay),
-        previousDay = days.splice(index, 1)[0],
-        newCurrent = days[index] || days[index - 1];
+      previousDay = days.splice(index, 1)[0],
+      newCurrent = days[index] || days[index - 1];
     // fix the remaining day numbers
     days.forEach(function (day, i) {
       day.setNumber(i + 1);
