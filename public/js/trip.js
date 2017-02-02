@@ -47,13 +47,13 @@ var tripModule = (function () {
 
   function addDay (data, noSwitch) {
     if (this && this.blur) this.blur(); // removes focus box from buttons
-    var promise = Promise.resolve();
+    var promise = Promise.resolve(data);
     if(!data){
       data = { number: days.length + 1 };
       promise = $.post('/api/days', data);
     }
-    promise.then(() => {
-      var newDay = dayModule.create(data); // dayModule
+    return promise.then((newData) => {
+      var newDay = dayModule.create(newData); // dayModule
       days.push(newDay);
       if (days.length === 1) {
         currentDay = newDay;
@@ -111,9 +111,11 @@ var tripModule = (function () {
     load: function () {
       //$(addDay);
       $.get('/api/days').then((days) => {
-        days.map((day) => {
+        return Promise.all(days.map((day) => {
           return addDay(day, true);
-        });
+        }))
+      })
+      .then(() => {
         currentDay.show();
       });
     },

@@ -23,7 +23,7 @@ router.get('/:id', function(req, res, next){
 
 router.post('/', function(req, res, next){
   Day.create(req.body)
-    .then(() => res.sendStatus(201))
+    .then((data) => res.status(201).json(data))
     .catch(next);
 });
 
