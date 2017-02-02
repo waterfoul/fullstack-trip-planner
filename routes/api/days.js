@@ -39,10 +39,10 @@ router.delete('/:id', function(req, res, next){
     .catch(next);
 })
 
-router.post('/:id/hotel', function(req, res, next){
-  Promise.all([
-    Day.findById(req.param.id),
-    Hotel.findById(req.body)
+router.post('/:id/hotel/:hotelId', function(req, res, next){
+	Promise.all([
+    Day.findById(req.params.id),
+    Hotel.findById(req.params.hotelId)
   ])
     .then(([day, hotel]) => day.setHotel(hotel))
     .then(() => res.sendStatus(204))
@@ -50,45 +50,45 @@ router.post('/:id/hotel', function(req, res, next){
 });
 
 router.delete('/:id/hotel', function(req, res, next){
-  Day.findById(req.param.id)
+  Day.findById(req.params.id)
     .then((day) => day.setHotel(null))
     .then(() => res.sendStatus(204))
     .catch(next);
 });
 
-router.post('/:id/restaurant', function(req, res, next){
+router.post('/:id/restaurant/:restaurantId', function(req, res, next){
   Promise.all([
-    Day.findById(req.param.id),
-    Restaurant.findById(req.body)
+    Day.findById(req.params.id),
+    Restaurant.findById(req.params.restaurantId)
   ])
     .then(([day, restaurant]) => day.addRestaurant(restaurant))
     .then(() => res.sendStatus(204))
     .catch(next);
 })
 
-router.delete('/:id/restaurant', function(req, res, next){
+router.delete('/:id/restaurant/:restaurantId', function(req, res, next){
   Promise.all([
-    Day.findById(req.param.id),
-    Restaurant.findById(req.body)
+    Day.findById(req.params.id),
+    Restaurant.findById(req.params.restaurantId)
   ])
     .then(([day, restaurant]) => day.removeRestaurant(restaurant))
     .then(() => res.sendStatus(204))
     .catch(next);
 })
 
-router.post('/:id/activity', function(req, res, next){
+router.post('/:id/activity/:activityId', function(req, res, next){
   Promise.all([
-    Day.findById(req.param.id),
-    Activity.findById(req.body)
+    Day.findById(req.params.id),
+    Activity.findById(req.params.activityId)
   ]).then(([day, activity]) => day.addActivity(activity))
     .then(() => res.sendStatus(204))
     .catch(next);
 })
 
-router.delete('/:id/activity', function(req, res, next){
+router.delete('/:id/activity/:activityId', function(req, res, next){
   Promise.all([
-    Day.findById(req.param.id),
-    Activity.findById(req.body)
+    Day.findById(req.params.id),
+    Activity.findById(req.params.activityId)
   ])
     .then(([day, activity]) => day.removeActivity(activity))
     .then(() => res.sendStatus(204))
