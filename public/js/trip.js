@@ -41,7 +41,7 @@ var tripModule = (function () {
   // jQuery event binding
 
   $(function () {
-    $addButton.on('click', addDay);
+    $addButton.on('click', () => addDay());
     $removeButton.on('click', deleteCurrentDay);
   });
 
@@ -88,15 +88,20 @@ var tripModule = (function () {
     // prevent deleting last day
     if (days.length < 2 || !currentDay) return;
     // remove from the collection
-    var index = days.indexOf(currentDay),
-      previousDay = days.splice(index, 1)[0],
-      newCurrent = days[index] || days[index - 1];
-    // fix the remaining day numbers
-    days.forEach(function (day, i) {
-      day.setNumber(i + 1);
-    });
-    switchTo(newCurrent);
-    previousDay.hideButton();
+    //console.log('currentDay:', currentDay);
+    $.ajax({method: 'DELETE', url: '/api/days/' + currentDay.id})
+    .then(() => {
+      var index = days.indexOf(currentDay),
+        previousDay = days.splice(index, 1)[0],
+        newCurrent = days[index] || days[index - 1];
+      // fix the remaining day numbers
+      days.forEach(function (day, i) {
+        day.setNumber(i + 1);
+      });
+      switchTo(newCurrent);
+      previousDay.hideButton();
+    })
+    .catch(() => alert('Could not delete current day'));
   }
 
   // globally accessible module methods

@@ -34,7 +34,10 @@ router.put('/:id', function(req, res, next){
 });
 
 router.delete('/:id', function(req, res, next){
-  Day.destroy({id: req.params.id})
+  Day.destroy({
+    where: {id: req.params.id},
+    individualHooks: true
+  })
     .then(() => res.sendStatus(204))
     .catch(next);
 })
