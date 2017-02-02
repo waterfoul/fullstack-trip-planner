@@ -134,18 +134,33 @@ var dayModule = (function () {
     // removing from the day object
     switch (attraction.type) {
       case 'hotel':
-        this.hotel = null;
+        $.ajax({method: 'DELETE', url: '/api/days/' + this.id + '/hotel'})
+        .then(() => {
+          this.hotel = null;
+          attraction.hide();
+        })
+        .catch(() => alert('Couldn\'t delete hotel'));
         break;
       case 'restaurant':
-        utilsModule.remove(this.restaurants, attraction);
+        $.ajax({method: 'DELETE', url: '/api/days/' + this.id + '/restaurant/' + attraction.id})
+        .then(() => {
+          utilsModule.remove(this.restaurants, attraction);
+          attraction.hide();
+        })
+        .catch(() => alert('Couldn\'t delete restaurant'));
         break;
       case 'activity':
-        utilsModule.remove(this.activities, attraction);
+        $.ajax({method: 'DELETE', url: '/api/days/' + this.id + '/activity/' + attraction.id})
+        .then(() => {
+          utilsModule.remove(this.activities, attraction);
+          attraction.hide();
+        })
+        .catch(() => alert('Couldn\'t delete activity'));
         break;
       default: console.error('bad type:', attraction);
     }
     // deactivating UI
-    attraction.hide();
+    //attraction.hide();
   };
 
   // globally accessible module methods
