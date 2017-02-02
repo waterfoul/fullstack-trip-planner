@@ -3,7 +3,7 @@ var Hotel = require('../../models/hotel');
 
 // /api/hotels
 router.get('/', function(req, res, next) {
-	Hotel.findAll()
+  Hotel.findAll()
 		.then(res.json.bind(res))
 		.catch(next);
 });

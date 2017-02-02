@@ -60,8 +60,8 @@ var tripModule = (function () {
     if (days.length < 2 || !currentDay) return;
     // remove from the collection
     var index = days.indexOf(currentDay),
-      previousDay = days.splice(index, 1)[0],
-      newCurrent = days[index] || days[index - 1];
+        previousDay = days.splice(index, 1)[0],
+        newCurrent = days[index] || days[index - 1];
     // fix the remaining day numbers
     days.forEach(function (day, i) {
       day.setNumber(i + 1);
